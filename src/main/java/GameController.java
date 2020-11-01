@@ -65,27 +65,27 @@ public class GameController {
     }
 
     public void playerPlayScizors() {
-        interfLb.setText("Scizorrs");
+        interfLb.setText("scissors");
         userChoose = Options.scissor;
     }
 
     public void playerPlayPaper() {
-        interfLb.setText("Paper");
+        interfLb.setText("paper");
         userChoose = Options.paper;
     }
 
     public void playerPlayRock() {
-        interfLb.setText("Rock");
+        interfLb.setText("rock");
         userChoose = Options.rock;
     }
 
     public void playerPlayBlizard() {
-        interfLb.setText("Blizard");
+        interfLb.setText("blizzard");
         userChoose = Options.blizard;
     }
 
     public void playerPlaySpock() {
-        interfLb.setText("Spock");
+        interfLb.setText("spock");
         userChoose = Options.spock;
     }
     Options comResul;
@@ -118,7 +118,6 @@ public class GameController {
         stage.show();
     }
 
-    FirstWindowController firstWindowController = new FirstWindowController();
 
     @FXML
     private void newRound() throws Exception {
