@@ -128,13 +128,13 @@ public class GameController {
     }
 
     public void gameStatus() throws IOException {
-        Writer status = new BufferedWriter(new FileWriter("gameStatus.txt", true));
+        Writer status = new BufferedWriter(new FileWriter("src/main/resources/files/gameStatus.txt", true));
         status.append(gameParams.getUsername() + ",score:" + userCurrentResult.size() + " VS " + "Computer, score: " + computerCurrentResult.size() + "\r");
         status.close();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Game Status");
         try {
-            Scanner scan = new Scanner(new File("gameStatus.txt"));//.useDelimiter("\\s+");
+            Scanner scan = new Scanner(new File("src/main/resources/files/gameStatus.txt"));//.useDelimiter("\\s+");
             while (scan.hasNext()) {
                 // if (scan.hasNextInt()) {
                 //   alert.setContentText(scan.nextInt() + " " + "");
@@ -279,7 +279,7 @@ public class GameController {
     }
 
     public void rankList() throws IOException {
-        Writer output = new BufferedWriter(new FileWriter("rank.txt", true));
+        Writer output = new BufferedWriter(new FileWriter("src/main/resources/files/rank.txt", true));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         output.append(gameParams.getUsername() + "," + "Date:" + formatter.format(date) + "," + "Score->" + userCurrentResult.size() + "\r");

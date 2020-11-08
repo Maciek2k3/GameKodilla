@@ -27,7 +27,7 @@ public class RankListController {
 
     public void initialize() throws IOException {
         try {
-            Scanner s = new Scanner(new File("rankSort.txt"));//.useDelimiter("\\s+");
+            Scanner s = new Scanner(new File("src/main/resources/files/rankSort.txt"));//.useDelimiter("\\s+");
             while (s.hasNext()) {
                 if (s.hasNextInt()) {
                     RankArea.appendText(s.nextInt() + " " + "");

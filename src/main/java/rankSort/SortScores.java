@@ -7,7 +7,7 @@ import java.util.Collections;
 public class SortScores {
 
     public SortScores() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("rank.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/files/rank.txt"));
         ArrayList<Users> usersScoreList = new ArrayList<Users>();
         String currentLine = reader.readLine();
         while (currentLine != null) {
@@ -19,7 +19,7 @@ public class SortScores {
 
         }
         Collections.sort(usersScoreList, new ScoreComparator());
-        BufferedWriter writer = new BufferedWriter(new FileWriter("rankSort.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/files/rankSort.txt"));
         for (Users users : usersScoreList) {
             writer.write(users.name);
             writer.write(">" + users.score);
