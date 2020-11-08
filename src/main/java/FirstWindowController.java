@@ -9,12 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import rankSort.SortScores;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class FirstWindowController {
 
@@ -40,7 +44,7 @@ public class FirstWindowController {
         String username = nameLb.getText();
 
         if (username.isEmpty()) {
-            validate=false;
+            validate = false;
             warningLb.setText("Give correct name");
         }
 
@@ -62,11 +66,26 @@ public class FirstWindowController {
             stage.setScene(scene);
             stage.show();
 
+        }
+    }
+        @FXML
+        public void showRankList(ActionEvent actionEvent) throws IOException {
+            FXMLLoader loaderN = new FXMLLoader();
+            loaderN.setLocation(getClass().getResource("RankList.fxml"));
+            AnchorPane pane = loaderN.load();
+            Scene scene = new Scene(pane);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.hide();
+            stage.setScene(scene);
+            stage.show();
 
         }
 
+
+
     }
 
-}
+
+
 
 

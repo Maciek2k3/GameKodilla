@@ -1,9 +1,10 @@
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -11,8 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-import java.io.IOException;
+import java.io.*;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -44,6 +46,10 @@ public class GameController {
     private GameParams gameParams;
     @FXML
     private Options userChoose = null;
+
+    @FXML
+    private CheckBox hardEasy;
+
 
     boolean validate = true;
     Main main = new Main();
@@ -91,6 +97,14 @@ public class GameController {
     Options comResul;
 
     public void computerPlay() {
+        if (hardEasy.isSelected()) {
+            easyComputerPlay();
+        } else {
+            hardComputerPlay();
+        }
+    }
+
+    public void easyComputerPlay() {
         Options[] values = Options.values();
         int length = values.length;
         int randInd = new Random().nextInt(length);
@@ -99,11 +113,47 @@ public class GameController {
         comResul= values[randInd];
     }
 
+    public void hardComputerPlay() {
+        if (userChoose == Options.scissor){
+            comResul=Options.paper;
+        }else if(userChoose==Options.paper){
+            comResul=Options.rock;
+        }else if(userChoose==Options.rock){
+            comResul=Options.scissor;
+        }else if(userChoose==Options.spock||userChoose==Options.blizard){
+            easyComputerPlay();
+        }
+
+    }
+
+    public void gameStatus() throws IOException {
+        Writer status = new BufferedWriter(new FileWriter("gameStatus.txt", true));
+        status.append(gameParams.getUsername()+",score:"+ userCurrentResult.size()+" VS "+"Computer, score: " +computerCurrentResult.size()+"\r");
+        status.close();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Game Status");
+        try {
+            Scanner scan = new Scanner(new File("gameStatus.txt"));//.useDelimiter("\\s+");
+            while (scan.hasNext()) {
+               // if (scan.hasNextInt()) {
+               //   alert.setContentText(scan.nextInt() + " " + "");
+               // } else {
+                    alert.setContentText(scan.nextLine() + "      " + "\n");
+                //}
+            }
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex);
+        }
+        alert.show();
+    }
+
     public void reset() {
         userCurrentResult.clear();
         computerCurrentResult.clear();
-        userResultLb.setText("0");
-        computerResultLb.setText("0");
+        userResultLb.setText(String.valueOf(userCurrentResult.size()));
+        computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
+       // userResultLb.setText("0");
+       // computerResultLb.setText("0");
     }
 
     @FXML
@@ -126,7 +176,7 @@ public class GameController {
 
     }
 
-    public void setComputerPlay() {
+    public void setComputerPlay() throws Exception{
         if (validate) {
             //Options computerChoose =
             computerPlay();
@@ -217,6 +267,7 @@ public class GameController {
 
             if (userCurrentResult.size() == gameParams.getGameRounds()) {
                 finalWiner.setText(gameParams.getUsername() + " WIN");
+                rankList();
                 validate = false;
             } else if (computerCurrentResult.size() == gameParams.getGameRounds()) {
                 finalWiner.setText("Computer Wins");
@@ -225,6 +276,16 @@ public class GameController {
                 finalWiner.setText("Semi");
         }
     }
-}
+    public void rankList() throws IOException {
+        Writer output = new BufferedWriter(new FileWriter("rank.txt", true));
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        output.append(gameParams.getUsername()+ ","+"Date:"+formatter.format(date)+","+"Score->"+userCurrentResult.size()+"\r");
+        output.close();
+        }
+    }
+
+
+
 
 

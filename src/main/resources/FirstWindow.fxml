@@ -18,7 +18,7 @@
       <Label layoutX="39.0" layoutY="262.0" prefHeight="50.0" prefWidth="250.0" text="How many rounds you are playing?" />
       <TextField fx:id="nameLb" layoutX="39.0" layoutY="220.0" />
       <TextField fx:id="roundLb" layoutX="39.0" layoutY="312.0" />
-      <Button layoutX="423.0" layoutY="287.0" minHeight="50.0" mnemonicParsing="false" onAction="#showNextWindow" prefWidth="80.0" text="CONFIRM" />
+      <Button layoutX="423.0" layoutY="262.0" minHeight="50.0" mnemonicParsing="false" onAction="#showNextWindow" prefWidth="80.0" text="CONFIRM" />
       <ImageView fitHeight="183.0" fitWidth="222.0" layoutX="406.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../test/main.png" />
@@ -29,5 +29,6 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="486.0" layoutY="365.0" mnemonicParsing="false" onAction="#showRankList" prefHeight="27.0" prefWidth="107.0" text="Rank List" />
    </children>
 </AnchorPane>
