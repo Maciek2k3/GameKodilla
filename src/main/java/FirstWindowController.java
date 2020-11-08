@@ -68,22 +68,22 @@ public class FirstWindowController {
 
         }
     }
-        @FXML
-        public void showRankList(ActionEvent actionEvent) throws IOException {
-            FXMLLoader loaderN = new FXMLLoader();
-            loaderN.setLocation(getClass().getResource("RankList.fxml"));
-            AnchorPane pane = loaderN.load();
-            Scene scene = new Scene(pane);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.hide();
-            stage.setScene(scene);
-            stage.show();
 
-        }
-
-
+    @FXML
+    public void showRankList(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loaderN = new FXMLLoader();
+        loaderN.setLocation(getClass().getResource("RankList.fxml"));
+        AnchorPane pane = loaderN.load();
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.hide();
+        stage.setScene(scene);
+        stage.show();
 
     }
+
+
+}
 
 
 

@@ -94,6 +94,7 @@ public class GameController {
         interfLb.setText("spock");
         userChoose = Options.spock;
     }
+
     Options comResul;
 
     public void computerPlay() {
@@ -110,17 +111,17 @@ public class GameController {
         int randInd = new Random().nextInt(length);
         System.out.println(values);
         System.out.println(randInd);
-        comResul= values[randInd];
+        comResul = values[randInd];
     }
 
     public void hardComputerPlay() {
-        if (userChoose == Options.scissor){
-            comResul=Options.paper;
-        }else if(userChoose==Options.paper){
-            comResul=Options.rock;
-        }else if(userChoose==Options.rock){
-            comResul=Options.scissor;
-        }else if(userChoose==Options.spock||userChoose==Options.blizard){
+        if (userChoose == Options.scissor) {
+            comResul = Options.paper;
+        } else if (userChoose == Options.paper) {
+            comResul = Options.rock;
+        } else if (userChoose == Options.rock) {
+            comResul = Options.scissor;
+        } else if (userChoose == Options.spock || userChoose == Options.blizard) {
             easyComputerPlay();
         }
 
@@ -128,17 +129,17 @@ public class GameController {
 
     public void gameStatus() throws IOException {
         Writer status = new BufferedWriter(new FileWriter("gameStatus.txt", true));
-        status.append(gameParams.getUsername()+",score:"+ userCurrentResult.size()+" VS "+"Computer, score: " +computerCurrentResult.size()+"\r");
+        status.append(gameParams.getUsername() + ",score:" + userCurrentResult.size() + " VS " + "Computer, score: " + computerCurrentResult.size() + "\r");
         status.close();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Game Status");
         try {
             Scanner scan = new Scanner(new File("gameStatus.txt"));//.useDelimiter("\\s+");
             while (scan.hasNext()) {
-               // if (scan.hasNextInt()) {
-               //   alert.setContentText(scan.nextInt() + " " + "");
-               // } else {
-                    alert.setContentText(scan.nextLine() + "      " + "\n");
+                // if (scan.hasNextInt()) {
+                //   alert.setContentText(scan.nextInt() + " " + "");
+                // } else {
+                alert.setContentText(scan.nextLine() + "      " + "\n");
                 //}
             }
         } catch (FileNotFoundException ex) {
@@ -152,8 +153,8 @@ public class GameController {
         computerCurrentResult.clear();
         userResultLb.setText(String.valueOf(userCurrentResult.size()));
         computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
-       // userResultLb.setText("0");
-       // computerResultLb.setText("0");
+        // userResultLb.setText("0");
+        // computerResultLb.setText("0");
     }
 
     @FXML
@@ -176,7 +177,7 @@ public class GameController {
 
     }
 
-    public void setComputerPlay() throws Exception{
+    public void setComputerPlay() throws Exception {
         if (validate) {
             //Options computerChoose =
             computerPlay();
@@ -189,7 +190,7 @@ public class GameController {
                     currentResult.setTextFill(Color.BLUE);
                 } else if (comResul == Options.paper || comResul == Options.blizard) {
                     userCurrentResult.add(1);
-                    currentResult.setText(gameParams.getUsername()+ " Win");
+                    currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
                 } else {
                     computerCurrentResult.add(1);
@@ -204,7 +205,7 @@ public class GameController {
                     currentResult.setTextFill(Color.BLUE);
                 } else if (comResul == Options.rock || comResul == Options.spock) {
                     userCurrentResult.add(1);
-                    currentResult.setText(gameParams.getUsername()+ " Win");
+                    currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
                 } else {
                     computerCurrentResult.add(1);
@@ -220,7 +221,7 @@ public class GameController {
                     currentResult.setTextFill(Color.BLUE);
                 } else if (comResul == Options.scissor || comResul == Options.blizard) {
                     userCurrentResult.add(1);
-                    currentResult.setText(gameParams.getUsername()+ " Win");
+                    currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
                 } else {
                     computerCurrentResult.add(1);
@@ -235,7 +236,7 @@ public class GameController {
                     currentResult.setTextFill(Color.BLUE);
                 } else if (comResul == Options.paper || comResul == Options.scissor) {
                     userCurrentResult.add(1);
-                    currentResult.setText(gameParams.getUsername()+ " Win");
+                    currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
                 } else {
                     computerCurrentResult.add(1);
@@ -250,7 +251,7 @@ public class GameController {
                     currentResult.setTextFill(Color.BLUE);
                 } else if (comResul == Options.scissor || comResul == Options.rock) {
                     userCurrentResult.add(1);
-                    currentResult.setText(gameParams.getUsername()+ " Win");
+                    currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
                 } else {
                     computerCurrentResult.add(1);
@@ -276,13 +277,14 @@ public class GameController {
                 finalWiner.setText("Semi");
         }
     }
+
     public void rankList() throws IOException {
         Writer output = new BufferedWriter(new FileWriter("rank.txt", true));
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
-        output.append(gameParams.getUsername()+ ","+"Date:"+formatter.format(date)+","+"Score->"+userCurrentResult.size()+"\r");
+        output.append(gameParams.getUsername() + "," + "Date:" + formatter.format(date) + "," + "Score->" + userCurrentResult.size() + "\r");
         output.close();
-        }
+    }
     }
 
 
