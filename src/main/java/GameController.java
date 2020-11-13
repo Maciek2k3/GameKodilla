@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,7 @@ public class GameController {
 
     @FXML
     private CheckBox hardEasy;
+    GameParamsSave gameParamsSave;
 
 
     boolean validate = true;
@@ -58,6 +60,9 @@ public class GameController {
 
     public void setGameParams(GameParams gameParams) {
         this.gameParams = gameParams;
+    }
+    public void setGameParamsSave(GameParamsSave gameParamsSave){
+        this.gameParamsSave=gameParamsSave;
     }
 
 
@@ -69,7 +74,18 @@ public class GameController {
         lbUser.setText(gameParams.getUsername().toUpperCase());
         lbPlay.setText(String.valueOf(gameParams.getGameRounds()));
     }
+    public void prepareGameSaveScreen(){
+        System.out.println("Comps score=" + gameParamsSave.getComScore());
+        System.out.println("User Score=" + gameParamsSave.getUserScore());
+        for (int i = 0; i < gameParamsSave.getComScore(); i++) {
+            computerCurrentResult.add(1);
+        }
+        for (int i = 0; i < gameParamsSave.getUserScore(); i++) {
+            userCurrentResult.add(1);}
 
+           userResultLb.setText(String.valueOf(userCurrentResult.size()));
+            computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
+        }
     public void playerPlayScizors() {
         interfLb.setText("scissors");
         userChoose = Options.scissor;
@@ -109,8 +125,8 @@ public class GameController {
         Options[] values = Options.values();
         int length = values.length;
         int randInd = new Random().nextInt(length);
-        System.out.println(values);
-        System.out.println(randInd);
+        //System.out.println(values);
+        //System.out.println(randInd);
         comResul = values[randInd];
     }
 
@@ -124,8 +140,21 @@ public class GameController {
         } else if (userChoose == Options.spock || userChoose == Options.blizard) {
             easyComputerPlay();
         }
-
     }
+        public void gameReturn() throws IOException {
+            Writer output = new BufferedWriter(new FileWriter("src/main/resources/files/gameReturn.txt", true));
+            output.append(String.valueOf(gameParams.getGameRounds()));
+            output.append(System.getProperty("line.separator"));
+            output.append(gameParams.getUsername());
+            output.append(System.getProperty("line.separator"));
+            output.append(String.valueOf(userCurrentResult.size()));
+            output.append(System.getProperty("line.separator"));
+            output.append(String.valueOf(computerCurrentResult.size()));
+            output.close();
+            Platform.exit();
+        }
+
+
 
     public void gameStatus() throws IOException {
         Writer status = new BufferedWriter(new FileWriter("src/main/resources/files/gameStatus.txt", true));
@@ -253,6 +282,7 @@ public class GameController {
                     userCurrentResult.add(1);
                     currentResult.setText(gameParams.getUsername() + " Win");
                     currentResult.setTextFill(Color.GREEN);
+
                 } else {
                     computerCurrentResult.add(1);
                     currentResult.setText("Computer Win");
@@ -269,6 +299,7 @@ public class GameController {
             if (userCurrentResult.size() == gameParams.getGameRounds()) {
                 finalWiner.setText(gameParams.getUsername() + " WIN");
                 rankList();
+
                 validate = false;
             } else if (computerCurrentResult.size() == gameParams.getGameRounds()) {
                 finalWiner.setText("Computer Wins");

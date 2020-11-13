@@ -1,5 +1,4 @@
 public enum Options {
-    scissor, paper, rock, blizard,spock
-
+    scissor, paper, rock, blizard, spock
 
 }

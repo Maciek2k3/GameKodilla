@@ -149,7 +149,7 @@
       <Button layoutX="388.0" layoutY="535.0" mnemonicParsing="false" onAction="#newRound" text="PLAY AGAIN" />
       <TextField fx:id="interfLb" layoutX="81.0" layoutY="298.0" prefHeight="27.0" prefWidth="126.0" />
       <TextField fx:id="computerChooseLb" layoutX="400.0" layoutY="298.0" onAction="#setComputerPlay" prefHeight="27.0" prefWidth="126.0" />
-      <TextField fx:id="finalWiner" layoutX="69.0" layoutY="501.0" onAction="#setComputerPlay" prefHeight="27.0" prefWidth="126.0">
+      <TextField fx:id="finalWiner" layoutX="14.0" layoutY="502.0" onAction="#setComputerPlay" prefHeight="35.0" prefWidth="147.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -160,5 +160,6 @@
       <Label fx:id="currentResult" layoutX="466.0" layoutY="493.0" prefHeight="17.0" prefWidth="111.0" />
       <CheckBox fx:id="hardEasy" layoutX="257.0" layoutY="316.0" mnemonicParsing="false" text="Hard" />
       <Button layoutX="241.0" layoutY="535.0" mnemonicParsing="false" onAction="#gameStatus" text="STATUS" />
+      <Button layoutX="178.0" layoutY="535.0" mnemonicParsing="false" onAction="#gameReturn" text="SAVE" />
    </children>
 </AnchorPane>

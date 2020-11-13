@@ -15,10 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class FirstWindowController {
 
@@ -28,6 +25,11 @@ public class FirstWindowController {
     private TextField roundLb;
     @FXML
     private Label warningLb;
+
+    private String userNameReturn;
+    private int userScrore;
+    private int compScore;
+    private int gameRounds;
 
     @FXML
     public void showNextWindow(ActionEvent actionEvent) throws IOException {
@@ -52,14 +54,11 @@ public class FirstWindowController {
         if (validate) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Game.fxml"));
-
             AnchorPane pane = loader.load();
-
             GameController gameController = loader.getController();
             GameParams gameParams = new GameParams(username, rounds);
             gameController.setGameParams(gameParams);
             gameController.prepareGameScreen();
-
             Scene scene = new Scene(pane);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.hide();
@@ -80,6 +79,38 @@ public class FirstWindowController {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    public void gameReturn(javafx.event.ActionEvent actionEvent) throws IOException {
+        List<String> read = new ArrayList<>();
+        Scanner s = new Scanner(new File("src/main/resources/files/gameReturn.txt"));
+        while (s.hasNextLine()) {
+            read.add(s.nextLine());
+        }
+        s.close();
+        gameRounds = Integer.parseInt(read.get(read.size() - 4));
+        userNameReturn = read.get(read.size() - 3);
+        userScrore = Integer.parseInt(read.get(read.size() - 2));
+        compScore = Integer.parseInt(read.get(read.size() - 1));
+        System.out.println(userNameReturn);
+        System.out.println(userScrore);
+        System.out.println(compScore);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Game.fxml"));
+        AnchorPane pane = loader.load();
+        GameController gameController = loader.getController();
+        GameParams gameParams = new GameParams(userNameReturn, gameRounds);
+        GameParamsSave gameParamsSave=new GameParamsSave(userScrore,compScore);
+        gameController.setGameParams(gameParams);
+        gameController.setGameParamsSave(gameParamsSave);
+        gameController.prepareGameSaveScreen();
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.hide();
+        stage.setScene(scene);
+        stage.show();
     }
 
 

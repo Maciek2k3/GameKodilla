@@ -30,5 +30,6 @@
          </font>
       </Label>
       <Button layoutX="486.0" layoutY="365.0" mnemonicParsing="false" onAction="#showRankList" prefHeight="27.0" prefWidth="107.0" text="Rank List" />
+      <Button layoutX="406.0" layoutY="365.0" mnemonicParsing="false" onAction="#gameReturn" text="Return" />
    </children>
 </AnchorPane>
