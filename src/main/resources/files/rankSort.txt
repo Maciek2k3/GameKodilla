@@ -13,7 +13,10 @@ MAciek,Date:2020-11-13,Score->5
 Maciek,Date:2020-11-13,Score->5
 Maciek,Date:2020-11-13,Score->5
 Maciek,Date:2020-11-13,Score->5
+Maciek,Date:2020-11-13,Score->5
 Maciek,Date:2020-11-13,Score->4
 Maciek,Date:2020-11-13,Score->4
 Maciek,Date:2020-11-13,Score->4
+Maciek,Date:2020-11-14,Score->4
+Maciek,Date:2020-11-14,Score->4
 Maciek,Date:2020-11-13,Score->3
