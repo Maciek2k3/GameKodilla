@@ -19,4 +19,5 @@ Maciek,Date:2020-11-13,Score->4
 Maciek,Date:2020-11-13,Score->4
 Maciek,Date:2020-11-14,Score->4
 Maciek,Date:2020-11-14,Score->4
+Maciek,Date:2020-11-17,Score->4
 Maciek,Date:2020-11-13,Score->3

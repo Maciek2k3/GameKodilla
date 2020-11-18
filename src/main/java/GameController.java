@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-
 public class GameController {
     @FXML
     private Label lbUser;
@@ -61,8 +60,9 @@ public class GameController {
     public void setGameParams(GameParams gameParams) {
         this.gameParams = gameParams;
     }
-    public void setGameParamsSave(GameParamsSave gameParamsSave){
-        this.gameParamsSave=gameParamsSave;
+
+    public void setGameParamsSave(GameParamsSave gameParamsSave) {
+        this.gameParamsSave = gameParamsSave;
     }
 
 
@@ -70,22 +70,24 @@ public class GameController {
         System.out.println("Start");
         System.out.println(this.gameParams);
         System.out.println(gameParams.getUsername());
-        //costam poustawiac na podstawie danych z poprzedniego ekranu
         lbUser.setText(gameParams.getUsername().toUpperCase());
         lbPlay.setText(String.valueOf(gameParams.getGameRounds()));
     }
-    public void prepareGameSaveScreen(){
+
+    public void prepareGameSaveScreen() {
         System.out.println("Comps score=" + gameParamsSave.getComScore());
         System.out.println("User Score=" + gameParamsSave.getUserScore());
         for (int i = 0; i < gameParamsSave.getComScore(); i++) {
             computerCurrentResult.add(1);
         }
         for (int i = 0; i < gameParamsSave.getUserScore(); i++) {
-            userCurrentResult.add(1);}
-
-           userResultLb.setText(String.valueOf(userCurrentResult.size()));
-            computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
+            userCurrentResult.add(1);
         }
+
+        userResultLb.setText(String.valueOf(userCurrentResult.size()));
+        computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
+    }
+
     public void playerPlayScizors() {
         interfLb.setText("scissors");
         userChoose = Options.scissor;
@@ -125,8 +127,6 @@ public class GameController {
         Options[] values = Options.values();
         int length = values.length;
         int randInd = new Random().nextInt(length);
-        //System.out.println(values);
-        //System.out.println(randInd);
         comResul = values[randInd];
     }
 
@@ -141,19 +141,19 @@ public class GameController {
             easyComputerPlay();
         }
     }
-        public void gameReturn() throws IOException {
-            Writer output = new BufferedWriter(new FileWriter("src/main/resources/files/gameReturn.txt", true));
-            output.append(String.valueOf(gameParams.getGameRounds()));
-            output.append(System.getProperty("line.separator"));
-            output.append(gameParams.getUsername());
-            output.append(System.getProperty("line.separator"));
-            output.append(String.valueOf(userCurrentResult.size()));
-            output.append(System.getProperty("line.separator"));
-            output.append(String.valueOf(computerCurrentResult.size()));
-            output.close();
-            Platform.exit();
-        }
 
+    public void gameReturn() throws IOException {
+        Writer output = new BufferedWriter(new FileWriter("src/main/resources/files/gameReturn.txt", true));
+        output.append(String.valueOf(gameParams.getGameRounds()));
+        output.append(System.getProperty("line.separator"));
+        output.append(gameParams.getUsername());
+        output.append(System.getProperty("line.separator"));
+        output.append(String.valueOf(userCurrentResult.size()));
+        output.append(System.getProperty("line.separator"));
+        output.append(String.valueOf(computerCurrentResult.size()));
+        output.close();
+        Platform.exit();
+    }
 
 
     public void gameStatus() throws IOException {
@@ -165,11 +165,7 @@ public class GameController {
         try {
             Scanner scan = new Scanner(new File("src/main/resources/files/gameStatus.txt"));//.useDelimiter("\\s+");
             while (scan.hasNext()) {
-                // if (scan.hasNextInt()) {
-                //   alert.setContentText(scan.nextInt() + " " + "");
-                // } else {
                 alert.setContentText(scan.nextLine() + "      " + "\n");
-                //}
             }
         } catch (FileNotFoundException ex) {
             System.err.println(ex);
@@ -182,8 +178,6 @@ public class GameController {
         computerCurrentResult.clear();
         userResultLb.setText(String.valueOf(userCurrentResult.size()));
         computerResultLb.setText(String.valueOf(computerCurrentResult.size()));
-        // userResultLb.setText("0");
-        // computerResultLb.setText("0");
     }
 
     @FXML
@@ -208,7 +202,6 @@ public class GameController {
 
     public void setComputerPlay() throws Exception {
         if (validate) {
-            //Options computerChoose =
             computerPlay();
             computerChooseLb.setText(String.valueOf(comResul));
             if (userChoose == Options.scissor) {
@@ -316,7 +309,7 @@ public class GameController {
         output.append(gameParams.getUsername() + "," + "Date:" + formatter.format(date) + "," + "Score->" + userCurrentResult.size() + "\r");
         output.close();
     }
-    }
+}
 
 
 
